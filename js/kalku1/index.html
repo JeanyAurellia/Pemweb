@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input name="bil1" type="text" value="" id="angka1" />
+    <input name="bil2" type="text" value="" id="angka2" />
+    <input name="hasil" type="text" value="0" id="hasil" /><br><br>
+    
+    <input name="hitung" type="button" value="tambah" onclick="hitung(this.value)"/>
+    <input name="hitung" type="button" value="kurang" onclick="hitung(this.value)"/>
+    <input name="hitung" type="button" value="kali" onclick="hitung(this.value)"/>
+    <input name="hitung" type="button" value="bagi" onclick="hitung(this.value)"/> 
+</body>
+</html>
+
+
+<script>
+function hitung(pilihan)
+{
+    var bil1=document.getElementById('angka1').value;
+    var bil2=document.getElementById('angka2').value;
+    bil1 = parseInt(bil1)
+    bil2 = parseInt(bil2)
+    if (pilihan=='tambah'){
+        document.getElementById('hasil').value = bil1 + bil2;
+    }
+    else if(pilihan == 'kurang'){
+        document.getElementById('hasil').value = bil1 - bil2;
+    }
+    else if(pilihan == 'kali'){
+        document.getElementById('hasil').value = bil1 * bil2;
+    }
+    else {
+        document.getElementById('hasil').value = bil1 / bil2;
+    }
+    document.getElementById('hasil').style.backgroundColor="#CCC";
+}
+</script>
