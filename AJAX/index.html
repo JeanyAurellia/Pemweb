@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="masukkan nama kota" spellcheck="false">
+            <button><img src="images/search.png"></button>
+        </div>  
+        <div class="weather">
+            <img src="images/clouds.png" class="icon-cuaca">
+            <h1 class="temp">36°C</h1> 
+            <div class="city">Surabaya</div>
+        </div>
+    </div>
+    <script>
+        const apiKey = "0a38502e275c25dc155679e7c72780f8";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+        const searchBox = document.querySelector(".search input");
+        const searchButton = document.querySelector(".search button");
+        const iconCuaca = document.querySelector(".icon-cuaca");
+
+        async function checkWeather(city){
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+            var data = await response.json();
+
+            console.log(data);
+            document.querySelector(".city").innerText = data.name;
+            document.querySelector(".temp").innerText = Math.round(data.main.temp) + "°C";
+
+            // Set icon cuaca berdasarkan data cuaca
+            if(data.weather[0].main == "Clouds"){
+                iconCuaca.src = "images/clouds.png";
+            }
+            else if(data.weather[0].main == "Clear"){
+                iconCuaca.src = "images/clear.png";
+            }
+            else if(data.weather[0].main == "Rain"){
+                iconCuaca.src = "images/rain.png";
+            }
+            else if(data.weather[0].main == "Drizzle"){
+                iconCuaca.src = "images/drizzle.png";
+            }
+            else if(data.weather[0].main == "Haze"){
+                iconCuaca.src = "images/mist.png";
+            }
+        }
+
+        searchButton.addEventListener("click", () => {
+            checkWeather(searchBox.value);
+        })
+    </script>
+</body>
+</html>
